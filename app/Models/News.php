@@ -22,6 +22,7 @@ class News extends Model implements Sortable
         'position',
         'footer_id',
         'header_id',
+        'category_id',
         'category',
         'source_url',
         'author',
@@ -92,5 +93,10 @@ class News extends Model implements Sortable
     public function header()
     {
         return $this->belongsTo(Header::class);
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
     }
 }

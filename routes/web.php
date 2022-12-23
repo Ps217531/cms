@@ -30,3 +30,5 @@ Route::get('/', [PageController::class , 'index'])->name('pages.welcome');
 Route::get('/news/{slug}', [NewsController::class, 'index'])->name('pages.show_news');
 
 Route::get('/news', [NewsController::class, 'showAllNews'])->name('pages.news');
+
+Route::get('news/category/{slug}', [NewsController::class, 'category'])->name('pages.category');

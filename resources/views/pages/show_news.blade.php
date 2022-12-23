@@ -7,9 +7,12 @@
     <title>Title</title>
 </head>
 <body>
+
 {!! $news->header->renderBlocks() !!}
     
 <div class="col-md-4">
+<p>Category: <a href="{{ route('pages.category', $category->id) }}">{{ $category->name }}</a></p>
+
     <div class="card mb-4 shadow-sm">
        <!-- image from form card top -->
        <img src="{{ $news->image('variable_image') }}" class="card-img-top">

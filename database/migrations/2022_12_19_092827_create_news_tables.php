@@ -14,7 +14,7 @@ class CreateNewsTables extends Migration
             
             $table->foreignId('header_id')->default("1")->nullable()->constrained()->onDelete('set null');
             $table->foreignId('footer_id')->default("1")->nullable()->constrained()->onDelete('set null');
-            
+            $table->foreignId('category_id')->nullable()->constrained()->onDelete('set null');
 
 
             // feel free to modify the name of this column, but title is supported by default (you would need to specify the name of the column Twill should consider as your "title" column in your module controller if you change it)

@@ -40,5 +40,18 @@ class HomeSeeder extends Seeder
       'footer_id' => 1,
       'header_id' => 1,
     ]);
+
+    DB::table('categories')->insert([
+      'name' => 'oorlog',
+    ]);
+    DB::table('categories')->insert([
+      'name' => 'politiek',
+    ]);
+    DB::table('categories')->insert([
+      'name' => 'onzin',
+    ]);
+    DB::table('categories')->insert([
+      'name' => 'event',
+    ]);
   }
 }

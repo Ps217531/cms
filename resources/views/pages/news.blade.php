@@ -1,47 +1,46 @@
+
+
 <!doctype html>
 <html lang="en">
-
 <head>
+    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-    <title>Title</title>
-</head>
 
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+
+
+    <title>All News Articles</title>
+</head>
 <body>
-    <!-- get header_id 1 and footer_id 1 -->
-    <?php 
-   
-    ?>
+    <!-- header -->
     {!! $header->renderBlocks() !!}
 
+    <div class="container mt-5">
+        <h1>All news articles</h1>
 
-
-
-    <!-- div with flex and horizontal align -->
-    <div class="d-flex justify-content-between ">
-        @foreach($news as $news)
-        <div class="col-md-4">
-            <div class="card mb-4 shadow-sm">
-                <img src="{{ $news->image('variable_image') }}" class="card-img-top">
-                <div class="card-body">
-                    <h5 class="card-title">{{ $news->title }}</h5>
-                    <p class="card-text">{{ $news->description }}</p>
-                    {!! $news->renderBlocks() !!}
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div class="btn-group">
-                            <a href="{{ route('pages.show_news', $news->slug) }}" class="btn btn-sm btn-outline-secondary">View</a>
+        <div class="row">
+            @foreach ($news as $news)
+                <div class="col-md-4 mb-3">
+                    <div class="card">
+                        <img src="{{ $news->image('variable_image') }}" class="card-img-top" alt="News article image">
+                        <div class="card-body">
+                            <h5 class="card-title"><a href="{{ route('pages.show_news', $news->slug) }}">{{ $news->title }}</a></h5>
+                            <p class="card-text">{{ $news->excerpt }} testttt</p>
                         </div>
-                        <small class="text-muted">{{ $news->published_at }}</small>
                     </div>
                 </div>
-            </div>
+            @endforeach
         </div>
-        @endforeach
     </div>
-    
-        {!! $footer->renderBlocks() !!}
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
-</body>
 
-</html>
+    <!-- footer -->
+    <div>
+    {!! $footer->renderBlocks() !!}
+</div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src = "https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity = "sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin = "anonymous" ></ script >
+    <script src = "https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity = "sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin = "anonymous" ></ script >
+        

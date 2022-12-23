@@ -54,33 +54,13 @@
     'renderForBlocks' => false
 ])
 
-    @formField('select', [
-        'name' => 'category',
-        'label' => 'Category',
-        'options' => [
-            [
-                'value' => 'news',
-                'label' => 'news'
-            ],
-            [
-                'value' => 'events',
-                'label' => 'events'
-            ],
-            [
-                'value' => 'projects',
-                'label' => 'projects'
-            ],
-            [
-                'value' => 'about',
-                'label' => 'about'
-            ],
-            [
-                'value' => 'contact',
-                'label' => 'contact'
-            ],
-        ]
+@formField('select', [
+    'name' => 'category_id',
+    'label' => 'Category',
+    'options' => App\Models\Category::all()->pluck('name', 'id'),
+    'placeholder' => 'Select a category',
+])
 
-    ])
     @formField('input', [
         'name' => 'author',
         'label' => 'Author',
