@@ -37,4 +37,13 @@ return [
         'module' => false,
     ],
    
+
+    'pages' => [
+        'title' => 'Pages',
+        'module' => true,
+    ],
+    'posts' => [
+        'title' => 'Posts',
+        'module' => true,
+    ],
 ];

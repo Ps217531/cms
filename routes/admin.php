@@ -22,3 +22,10 @@ Route::get('header/edit', [HeaderController::class , 'edit'])->name('header.edit
 
 Route::module('news');
 
+// /////////////////////////////////////////////////////////////////////
+
+Route::module('pages');
+
+Route::module('posts');
+
+
