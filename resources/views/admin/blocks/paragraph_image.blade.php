@@ -20,7 +20,7 @@
 'unpack' => true,
 'options' => [
 [
-'value' => 'float-start',
+'value' => 'float-start p-5 d-inline d-sm-block',
 'label' => 'Left'
 ],
 [
@@ -28,7 +28,7 @@
 'label' => 'Center'
 ],
 [
-'value' => 'float-end p-5',
+'value' => 'float-end p-5  d-inline d-sm-block',
 'label' => 'Right'
 ],
 ]

@@ -47,13 +47,13 @@
     @formField('block_editor', [
     'name' => 'home',
     'label' => 'Blocks',
-    'blocks' => ['paragraph_image']
+    'blocks' => ['paragraph_image', 'text_in_image']
     ])
 
     @formField('block_editor', [
     'name' => 'news',
     'label' => 'Blocks',
-    'blocks' => ['news_browser']
+    'blocks' => ['news_browser', 'nav']
     ])
 
 

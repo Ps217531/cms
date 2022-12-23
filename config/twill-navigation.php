@@ -24,7 +24,17 @@ return [
         'module' => true,
     ],
      
+    'projects' => [
+        'can' => 'custom-permission',
+        'title' => 'Projects',
+        'module' => true,
+    ],
 
-  
+    // user role
+    'user' => [
+        'can' => 'custom-permission',
+        'title' => 'usr',
+        'module' => false,
+    ],
    
 ];

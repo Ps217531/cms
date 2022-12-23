@@ -33,7 +33,15 @@ class NewsController extends Controller
         $news = News::all();
         $header = Header::where('id', 1)->first(); 
         $footer = Footer::where('id', 1)->first();
+        //  if $category is selected show all news from that categrory
+        
+
+
+        
+
+
         return view('pages.news', compact('news', 'header', 'footer'));
+
     }
 
      

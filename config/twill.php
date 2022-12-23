@@ -80,7 +80,8 @@ return [
                 'title' => 'Footer',
                 'icon' => 'text',
                 'component' => 'a17-block-footer'
-            ]
+            ],
+         
             
         ],
 

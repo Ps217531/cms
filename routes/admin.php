@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Collection;
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\HomepageController;
 use App\Http\Controllers\Admin\FooterController;
@@ -19,3 +21,4 @@ Route::module('headers');
 Route::get('header/edit', [HeaderController::class , 'edit'])->name('header.edit')->defaults('id', 1);
 
 Route::module('news');
+

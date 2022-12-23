@@ -27,7 +27,9 @@
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
-        }
+        },
+        "files": ["app/Models/Enums/UserRole.php"],
+        "exclude-from-classmap": ["vendor/area17/twill/src/Models/Enums/UserRole.php"]
     },
     "autoload-dev": {
         "psr-4": {

@@ -1,7 +1,11 @@
 @extends('twill::layouts.form')
 
 @section('contentFields')
-    @formField('input', [
+   
+
+
+
+@formField('input', [
         'name' => 'description',
         'label' => 'Description',
         'maxlength' => 100
@@ -14,10 +18,79 @@
     
     ])
     <!-- block_editor -->
+@formField('radios', [
+    'name' => 'type',
+    'label' => 'Article type',
+    'default' => 'long_form',
+    'inline' => true,
+    'options' => [
+        [
+            'value' => 'long_form',
+            'label' => 'Long form article'
+        ],
+        [
+            'value' => 'news',
+            'label' => 'news article'
+        ]
+    ]
+])
 
+@formConnectedFields([
+    'fieldName' => 'type',
+    'fieldValues' => 'news',
+    'renderForBlocks' => false
+])
+
+    
     @formField('block_editor', [
     'label' => 'Blocks',
-    'blocks' => ['paragraph_image']
+    'blocks' => ['paragraph_image', 'news_articles']
     ])
+@endformConnectedFields
+
+@formConnectedFields([
+    'fieldName' => 'type',
+    'fieldValues' => 'long_form',
+    'renderForBlocks' => false
+])
+
+    @formField('select', [
+        'name' => 'category',
+        'label' => 'Category',
+        'options' => [
+            [
+                'value' => 'news',
+                'label' => 'news'
+            ],
+            [
+                'value' => 'events',
+                'label' => 'events'
+            ],
+            [
+                'value' => 'projects',
+                'label' => 'projects'
+            ],
+            [
+                'value' => 'about',
+                'label' => 'about'
+            ],
+            [
+                'value' => 'contact',
+                'label' => 'contact'
+            ],
+        ]
+
+    ])
+    @formField('input', [
+        'name' => 'author',
+        'label' => 'Author',
+        'maxlength' => 100
+    ])
+
+    
+
+   
+
+@endformConnectedFields
 
 @stop

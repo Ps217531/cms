@@ -22,6 +22,10 @@ class News extends Model implements Sortable
         'position',
         'footer_id',
         'header_id',
+        'category',
+        'source_url',
+        'author',
+        
     ];
     
     // footer_id field and header_id field is 1
