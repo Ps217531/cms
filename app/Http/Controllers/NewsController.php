@@ -8,6 +8,7 @@ use App\Models\Header;
 use App\Models\Footer;
 use App\Repositories\NewsRepository;
 use Illuminate\Http\Request;
+use illuminate\DatabaseEloquent\Collection\paginate;
 
 class NewsController extends Controller
 {
@@ -46,6 +47,9 @@ class NewsController extends Controller
     public function showAllNews()
     {
         $news = News::all();
+        // add pagination to news
+        $news = News::paginate(4);
+
         $header = Header::where('id', 1)->first(); 
         $footer = Footer::where('id', 1)->first();
         //  if $category is selected show all news from that categrory

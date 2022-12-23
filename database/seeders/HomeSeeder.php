@@ -53,5 +53,27 @@ class HomeSeeder extends Seeder
     DB::table('categories')->insert([
       'name' => 'event',
     ]);
+    DB::table('categories')->insert([
+      'name' => 'sport',
+    ]);
+    DB::table('categories')->insert([
+      'name' => 'kunst',
+    ]);
+    DB::table('categories')->insert([
+      'name' => 'muziek',
+    ]);
+    DB::table('categories')->insert([
+      'name' => 'film',
+    ]);
+    DB::table('categories')->insert([
+      'name' => 'boek',
+    ]);
+    DB::table('categories')->insert([
+      'name' => 'theater',
+    ]);
+    DB::table('categories')->insert([
+      'name' => 'kunst',
+    ]);
+    
   }
 }

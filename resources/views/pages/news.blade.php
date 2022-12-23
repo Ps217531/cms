@@ -21,18 +21,32 @@
         <h1>All news articles</h1>
 
         <div class="row">
-            @foreach ($news as $news)
-                <div class="col-md-4 mb-3">
-                    <div class="card">
-                        <img src="{{ $news->image('variable_image') }}" class="card-img-top" alt="News article image">
-                        <div class="card-body">
-                            <h5 class="card-title"><a href="{{ route('pages.show_news', $news->slug) }}">{{ $news->title }}</a></h5>
-                            <p class="card-text">{{ $news->excerpt }} testttt</p>
-                        </div>
-                    </div>
+    @foreach ($news as $article)
+        <div class="col-md-4 mb-3">
+            <div class="card">
+                <img src="{{ $article->image('variable_image') }}" class="card-img-top" alt="News article image">
+                <div class="card-body">
+                    <h5 class="card-title"><a href="{{ route('pages.show_news', $article->slug) }}">{{ $article->title }}</a></h5>
+                    <p class="card-text">{{ $article->excerpt }} testttt</p>
                 </div>
-            @endforeach
+            </div>
         </div>
+    @endforeach
+</div>
+ <!-- use pagination with small buttons -->
+    <div class="d-flex justify-content-center">
+        {{ $news->links() }}
+
+    
+ 
+    
+
+
+
+
+
+
+
     </div>
 
     <!-- footer -->
