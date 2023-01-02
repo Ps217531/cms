@@ -7,3 +7,16 @@
         'maxlength' => 100
     ])
 @stop
+@extends('twill::layouts.form', [
+    'additionalFieldsets' => [
+        ['fieldset' => 'metadata', 'label' => 'SEO'],
+    ]
+])
+
+@section('contentFields')
+...your other form fields
+@stop
+
+@section('fieldsets')
+    @metadataFields
+@stop

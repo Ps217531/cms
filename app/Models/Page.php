@@ -9,13 +9,34 @@ use A17\Twill\Models\Behaviors\HasFiles;
 use A17\Twill\Models\Behaviors\HasRevisions;
 use A17\Twill\Models\Behaviors\HasPosition;
 use A17\Twill\Models\Behaviors\Sortable;
+use A17\Twill\Models\Behaviors\HasMetadata;
+
+
 use A17\Twill\Models\Model;
 
 class Page extends Model implements Sortable
 {
     use HasBlocks, HasSlug, HasMedias, HasFiles, HasRevisions, HasPosition;
+ 
+   
+    public $metadataFallbacks = [
+        'title' => 'name',
+        'description' => 'bio',
+    ];   
+    
+    public $metadataDefaultOgType = 'website';
+    public $metadataDefaultCardType = 'summary_large_image';
 
-    protected $fillable = [
+    protected function initializeHasMetadata()
+    {
+        // Setup the array for fallback columns
+        $this->metadataFallbacks = array_merge(config('metadata.fallbacks'), $this->metadataFallbacks);
+
+        // Add the default metadata from config into the $mediasParams array
+        // by default adds in an 'og_image' role with a 'default' crop
+        $this->mediasParams = array_merge($this->mediasParams, config('metadata.mediasParams') );
+    }
+    protected $fillable = [ 
         'published',
         'title',
         'description',

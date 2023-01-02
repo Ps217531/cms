@@ -7,106 +7,80 @@ use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvid
 
 use A17\Twill\Models\User;
 use Illuminate\Support\Facades\Gate;
-   
+use A17\Twill\AuthServiceProvider as TwillAuthServiceProvider;
 
-    class AuthServiceProvider extends ServiceProvider
+class AuthServiceProvider extends TwillAuthServiceProvider
+{
+    const ALL_ROLES = [UserRole::VIEWONLY, UserRole::AUTHOR, UserRole::PUBLISHER, UserRole::ADMIN];
+    const ALL_EDITORS = [UserRole::AUTHOR, UserRole::PUBLISHER, UserRole::ADMIN];
+
+    public function boot()
     {
-        const SUPERADMIN = 'SUPERADMIN';
+        // `pages` module permissions
+        Gate::define('list-pages', function ($user) {
+            return $this->authorize($user, function ($user) {
+                return $this->userHasRole($user, [UserRole::VIEWONLY, UserRole::PUBLISHER, UserRole::ADMIN]);
+            });
+        });
+        Gate::define('edit-pages', function ($user) {
+            return $this->authorize($user, function ($user) {
+                return $this->userHasRole($user, [UserRole::PUBLISHER, UserRole::ADMIN]);
+            });
+        });
 
-        protected function authorize($user, $callback)
-        {
-            if (!$user->isPublished()) {
-                return false;
-            }
-    
-            if ($user->isSuperAdmin()) {
-                return true;
-            }
-    
-            return $callback($user);
-        }
-    
-        protected function userHasRole($user, $roles)
-        {
-            return in_array($user->role_value, $roles);
-        }
-    
-        public function boot()
-        {
-            Gate::define('list', function ($user) {
-                return $this->authorize($user, function ($user) {
-                    return $this->userHasRole($user, [UserRole::VIEWONLY, UserRole::PUBLISHER]);
-                });
+        // `posts` module permissions
+        Gate::define('list-posts', function ($user) {
+            return $this->authorize($user, function ($user) {
+                return $this->userHasRole($user, self::ALL_ROLES);
             });
-    
-            Gate::define('edit', function ($user) {
-                return $this->authorize($user, function ($user) {
-                    return $this->userHasRole($user, [UserRole::PUBLISHER]);
-                });
+        });
+        Gate::define('edit-posts', function ($user) {
+            return $this->authorize($user, function ($user) {
+                return $this->userHasRole($user, self::ALL_EDITORS);
             });
-    
-            Gate::define('reorder', function ($user) {
-                return $this->authorize($user, function ($user) {
-                    return $this->userHasRole($user, [UserRole::PUBLISHER]);
-                });
+        });
+
+         // `list` permission is needed to access the Media Library
+         Gate::define('list', function ($user) {
+            return $this->authorize($user, function ($user) {
+                return $this->userHasRole($user, self::ALL_ROLES);
             });
-    
-            Gate::define('publish', function ($user) {
-                return $this->authorize($user, function ($user) {
-                    return $this->userHasRole($user, [UserRole::PUBLISHER]);
-                });
+        });
+
+        // `upload` and `edit` permissions are needed to upload to the Media Library
+        Gate::define('upload', function ($user) {
+            return $this->authorize($user, function ($user) {
+                return $this->userHasRole($user, self::ALL_EDITORS);
             });
-    
-            Gate::define('feature', function ($user) {
-                return $this->authorize($user, function ($user) {
-                    return $this->userHasRole($user, [UserRole::PUBLISHER]);
-                });
+        });
+        Gate::define('edit', function ($user) {
+            return $this->authorize($user, function ($user) {
+                return $this->userHasRole($user, self::ALL_EDITORS);
             });
-    
-            Gate::define('delete', function ($user) {
-                return $this->authorize($user, function ($user) {
-                    return $this->userHasRole($user, [UserRole::PUBLISHER]);
-                });
+        });
+
+        // `pages` module permissions
+        Gate::define('list-pages', function ($user) {
+            return $this->authorize($user, function ($user) {
+                return $this->userHasRole($user, [UserRole::VIEWONLY, UserRole::PUBLISHER, UserRole::ADMIN]);
             });
-    
-            Gate::define('duplicate', function ($user) {
-                return $this->authorize($user, function ($user) {
-                    return $this->userHasRole($user, [UserRole::PUBLISHER]);
-                });
+        });
+        Gate::define('edit-pages', function ($user) {
+            return $this->authorize($user, function ($user) {
+                return $this->userHasRole($user, [UserRole::PUBLISHER, UserRole::ADMIN]);
             });
-    
-            Gate::define('upload', function ($user) {
-                return $this->authorize($user, function ($user) {
-                    return $this->userHasRole($user, [UserRole::PUBLISHER]);
-                });
+        });
+
+        // `posts` module permissions
+        Gate::define('list-posts', function ($user) {
+            return $this->authorize($user, function ($user) {
+                return $this->userHasRole($user, self::ALL_ROLES);
             });
-    
-            Gate::define('manage-users', function ($user) {
-                return $this->authorize($user, function ($user) {
-                    return $this->userHasRole($user, [UserRole::ADMIN]);
-                });
+        });
+        Gate::define('edit-posts', function ($user) {
+            return $this->authorize($user, function ($user) {
+                return $this->userHasRole($user, self::ALL_EDITORS);
             });
-    
-            // As an admin, I can edit users, except superadmins
-            // As a non-admin, I can edit myself only
-            Gate::define('edit-user', function ($user, $editedUser = null) {
-                return $this->authorize($user, function ($user) use ($editedUser) {
-                    $editedUserObject = User::find($editedUser);
-                    return ($this->userHasRole($user, [UserRole::ADMIN]) || $user->id == $editedUser)
-                        && ($editedUserObject ? $editedUserObject->role !== self::SUPERADMIN : true);
-                });
-            });
-    
-            Gate::define('publish-user', function ($user) {
-                return $this->authorize($user, function ($user) {
-                    $editedUserObject = User::find(request('id'));
-                    return $this->userHasRole($user, [UserRole::ADMIN]) && ($editedUserObject ? $user->id !== $editedUserObject->id && $editedUserObject->role !== self::SUPERADMIN : false);
-                });
-            });
-    
-            Gate::define('impersonate', function ($user) {
-                return $user->role === self::SUPERADMIN;
-            });
-    
-        }
+        });
     }
+}

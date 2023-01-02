@@ -1,6 +1,21 @@
 <?php
 
 return [
+
+    'settings' => [
+        'title' => 'Settings',
+        'route' => 'admin.settings',
+        'params' => ['section' => 'seo'],
+        'primary_navigation' => [
+            //...
+            'seo' => [
+                'title' => 'SEO',
+                'route' => 'admin.settings',
+                'params' => ['section' => 'seo']
+            ],
+            //...
+        ]
+    ],
     'homepages' => [
         'title' => 'Home',
         // 'module' => true,
@@ -45,5 +60,6 @@ return [
     'posts' => [
         'title' => 'Posts',
         'module' => true,
+        'can' => 'list-posts',
     ],
 ];
